@@ -1,0 +1,208 @@
+# Python Basic: set, dict, and tuple usage
+
+
+# --------------------
+# Set
+# --------------------
+# A set stores unique values. Order is not guaranteed.
+
+nums = {1, 2, 2, 3}
+print(nums)  # {1, 2, 3}
+
+nums.add(4)
+nums.remove(2)  # error if 2 is not in the set
+nums.discard(9)  # no error if 9 is not in the set
+
+print(3 in nums)  # True
+print(len(nums))  # 3
+
+a = {1, 2, 3}
+b = {3, 4, 5}
+
+print(a | b)  # union: {1, 2, 3, 4, 5}
+print(a & b)  # intersection: {3}
+print(a - b)  # difference: {1, 2}
+
+
+# --------------------
+# Dict
+# --------------------
+# A dict stores key-value pairs.
+
+student = {
+    "name": "Alice",
+    "age": 20,
+    "major": "CS",
+}
+
+print(student["name"])  # Alice
+print(student.get("grade", "N/A"))  # N/A
+
+student["age"] = 21
+student["grade"] = "A"
+
+for key, value in student.items():
+    print(key, value)
+
+print(student.keys())
+print(student.values())
+
+if "major" in student:
+    print("major exists")
+
+del student["major"]
+removed_grade = student.pop("grade")
+print(removed_grade)
+
+
+# --------------------
+# Tuple
+# --------------------
+# A tuple is like a list, but immutable.
+
+point = (3, 4)
+print(point[0])  # 3
+print(point[1])  # 4
+
+x, y = point
+print(x, y)
+
+person = ("Bob", 25, "Math")
+name, age, major = person
+print(name, age, major)
+
+# Tuple with one item needs a comma.
+single = (10,)
+print(single)
+
+# Tuples are often used as dict keys because they are immutable.
+locations = {
+    (0, 0): "origin",
+    (3, 4): "point A",
+}
+
+print(locations[(3, 4)])
+
+
+# --------------------
+# Queue / Deque
+# --------------------
+# In Python, use deque for an efficient queue.
+# deque means double-ended queue.
+
+from collections import deque
+
+
+# Basic queue: first in, first out
+queue = deque()
+
+queue.append(1)
+queue.append(2)
+queue.append(3)
+
+print(queue.popleft())  # 1
+print(queue.popleft())  # 2
+print(queue)  # deque([3])
+
+
+# Check if queue is empty
+if queue:
+    print("queue is not empty")
+
+
+# Deque can add/remove from both sides
+dq = deque([1, 2, 3])
+
+dq.append(4)  # add to right
+dq.appendleft(0)  # add to left
+
+print(dq)  # deque([0, 1, 2, 3, 4])
+
+right = dq.pop()  # remove from right
+left = dq.popleft()  # remove from left
+
+print(right)  # 4
+print(left)  # 0
+print(dq)  # deque([1, 2, 3])
+
+
+# Common BFS pattern
+grid = [
+    [0, 1, 1],
+    [1, 1, 0],
+    [0, 1, 1],
+]
+
+rows = len(grid)
+cols = len(grid[0])
+directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+
+q = deque()
+visited = set()
+
+q.append((0, 0))
+visited.add((0, 0))
+
+while q:
+    r, c = q.popleft()
+
+    for dr, dc in directions:
+        nr = r + dr
+        nc = c + dc
+
+        if nr < 0 or nr >= rows or nc < 0 or nc >= cols:
+            continue
+        if (nr, nc) in visited:
+            continue
+
+        visited.add((nr, nc))
+        q.append((nr, nc))
+
+
+# Time complexity:
+#   append: O(1)
+#   appendleft: O(1)
+#   pop: O(1)
+#   popleft: O(1)
+#
+# Avoid using list.pop(0) for queues because it is O(n).
+
+
+# --------------------
+# Regular Queue
+# --------------------
+# Python also has queue.Queue.
+# It is thread-safe, so it is useful for multi-threading.
+# For LeetCode BFS, deque is usually simpler and faster.
+
+from queue import Queue
+
+
+regular_queue = Queue()
+
+regular_queue.put(1)
+regular_queue.put(2)
+regular_queue.put(3)
+
+print(regular_queue.get())  # 1
+print(regular_queue.get())  # 2
+
+if not regular_queue.empty():
+    print("regular_queue is not empty")
+
+print(regular_queue.qsize())  # current size
+
+
+# Queue methods:
+#   put(x): add x to the back
+#   get(): remove and return the front
+#   empty(): check if queue is empty
+#   qsize(): return current size
+#
+# Time complexity:
+#   put: O(1)
+#   get: O(1)
+#
+# LeetCode recommendation:
+#   Use deque for BFS.
+#   Use queue.Queue when you need thread-safe queue behavior.

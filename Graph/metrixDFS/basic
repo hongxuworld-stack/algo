@@ -1,0 +1,44 @@
+# Matrix DFS basic template
+
+
+directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+
+
+def dfs(matrix, r, c, visited):
+    rows = len(matrix)
+    cols = len(matrix[0])
+
+    if r < 0 or r >= rows or c < 0 or c >= cols:
+        return
+    if (r, c) in visited:
+        return
+
+    visited.add((r, c))
+
+    for dr, dc in directions:
+        dfs(matrix, r + dr, c + dc, visited)
+
+
+# --------------------
+# Time complexity
+# --------------------
+#
+# rows = number of rows in the matrix
+# cols = number of columns in the matrix
+# total cells = rows * cols
+#
+# Matrix DFS:
+#   Each cell is visited at most once.
+#   For each cell, we check 4 directions.
+#
+# Time complexity:
+#   O(rows * cols)
+#
+# Space complexity:
+#   visited set: O(rows * cols)
+#   recursion stack: O(rows * cols) worst case
+#   total: O(rows * cols)
+#
+# If you mark the matrix directly instead of using visited:
+#   extra visited space: O(1)
+#   recursion stack: O(rows * cols) worst case

@@ -1,0 +1,32 @@
+from collections import deque
+
+q = deque()
+
+# 1. 把所有 source 放进 queue
+for r in range(rows):
+    for c in range(cols):
+        if grid[r][c] 是起点:
+            q.append((r, c))
+            dist[r][c] = 0
+
+# 2. BFS 一层一层扩散
+directions = [(1,0), (-1,0), (0,1), (0,-1)]
+
+while q:
+    r, c = q.popleft()
+
+    for dr, dc in directions:
+        nr = r + dr
+        nc = c + dc
+
+        if 越界:
+            continue
+
+        if 已访问:
+            continue
+
+        if 不能走:
+            continue
+
+        dist[nr][nc] = dist[r][c] + 1
+        q.append((nr, nc))
