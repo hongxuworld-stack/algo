@@ -16,11 +16,8 @@ def group_transactions(transactions: List[Dict[str, str]]) -> List[List[str]]:
             parent[root_a] = root_b
     attr_list = ["email","device"]
     attr_to_index = defaultdict(dict)
-    # for attr in attr_list:
-    #     attr_to_index[attr] = {}
     for i,tx in enumerate(transactions):
         for attr in attr_list:
-            # value = tx[attr]
             value = tx.get(attr)
             if value is None:
                 continue
