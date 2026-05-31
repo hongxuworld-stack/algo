@@ -9,3 +9,5 @@
 # Return an array answer, where answer[i] is the number of islands after the i-th land addition.
 class Solution:
     def numIslands2(self, m: int, n: int, positions: List[List[int]]) -> List[int]:
+        parent = [-1 for _ in range(m*n)]
+        
