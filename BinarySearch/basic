@@ -1,0 +1,149 @@
+﻿Binary Search / 二分法
+
+核心：只要能把问题转成一个单调的 True / False 条件，就可以二分。
+
+
+1) 找第一个满足条件的位置 / 最后一个满足条件的位置
+
+假设数组下标是 [0, n - 1]，check(i) 表示位置 i 是否满足条件。
+
+找第一个满足 check(i) == True 的位置：
+
+def first_true(n):
+    left, right = 0, n - 1
+    ans = -1
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if check(mid):
+            ans = mid
+            right = mid - 1
+        else:
+            left = mid + 1
+
+    return ans
+
+特点：
+- check(mid) 为 True，说明 mid 可能是答案，但还要往左找更早的位置。
+- check(mid) 为 False，说明答案只能在右边。
+
+例子：找第一个 >= target 的位置
+
+def lower_bound(nums, target):
+    left, right = 0, len(nums) - 1
+    ans = len(nums)
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if nums[mid] >= target:
+            ans = mid
+            right = mid - 1
+        else:
+            left = mid + 1
+
+    return ans
+
+
+找最后一个满足 check(i) == True 的位置：
+
+def last_true(n):
+    left, right = 0, n - 1
+    ans = -1
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if check(mid):
+            ans = mid
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    return ans
+
+特点：
+- check(mid) 为 True，说明 mid 可能是答案，但还要往右找更晚的位置。
+- check(mid) 为 False，说明答案只能在左边。
+
+例子：找最后一个 <= target 的位置
+
+def upper_bound_le(nums, target):
+    left, right = 0, len(nums) - 1
+    ans = -1
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if nums[mid] <= target:
+            ans = mid
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    return ans
+
+
+2) 答案二分 / Binary Search on Answer
+
+适用场景：
+- 答案是一个整数范围，比如 [1, max(nums)]、[0, sum(nums)]。
+- 给定一个候选答案 x，可以用 check(x) 判断 x 是否可行。
+- 可行性具有单调性。
+
+常见单调性：
+- x 越大越容易满足：False False False True True True
+  找最小可行答案，用 first_true。
+- x 越大越难满足：True True True False False False
+  找最大可行答案，用 last_true。
+
+
+找最小可行答案：
+
+def min_feasible(left, right):
+    ans = right
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if check(mid):
+            ans = mid
+            right = mid - 1
+        else:
+            left = mid + 1
+
+    return ans
+
+
+找最大可行答案：
+
+def max_feasible(left, right):
+    ans = left
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if check(mid):
+            ans = mid
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    return ans
+
+
+答案二分做题步骤：
+
+1. 明确答案范围：[left, right]
+2. 写 check(x)：判断答案为 x 时是否满足题意
+3. 判断单调性：
+   - 越大越容易：找最小 True
+   - 越大越难：找最大 True
+4. 套模板
+
+小口诀：
+
+- 找第一个满足：满足就往左压，right = mid - 1
+- 找最后一个满足：满足就往右推，left = mid + 1
+- 答案二分的难点通常不是模板，而是 check(x) 和单调性
