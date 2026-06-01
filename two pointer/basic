@@ -1,0 +1,236 @@
+# 双指针基础知识
+
+双指针就是用两个下标去扫描数组、字符串或者链表。
+核心目的：减少不必要的重复遍历，避免很多 `O(n^2)` 的暴力枚举。
+
+常见复杂度：
+- 暴力枚举两个元素：`O(n^2)`
+- 双指针扫描：通常是 `O(n)`
+- 如果需要先排序：通常是 `O(n log n)`
+
+## 什么时候用双指针
+
+看到这些信号，可以考虑双指针：
+- 数组已经有序，或者可以先排序。
+- 题目要求找一对元素、一个区间、一个边界。
+- 移动某一个指针后，可以让答案更接近目标。
+- 题目和子数组、子字符串、两数之和、回文、去重、合并有关。
+
+## 类型 1：相向双指针
+
+一个指针从左边开始，一个指针从右边开始。
+
+常见题型：
+- Two Sum II
+- Valid Palindrome
+- Container With Most Water
+- 3Sum / 4Sum，通常需要先排序
+
+基础模板：
+
+```python
+left = 0
+right = len(nums) - 1
+
+while left < right:
+    cur = nums[left] + nums[right]
+
+    if cur == target:
+        return [left, right]
+    elif cur < target:
+        left += 1
+    else:
+        right -= 1
+```
+
+核心思想：
+- 如果数组有序，并且当前和太小，说明需要更大的数，移动 `left`。
+- 如果当前和太大，说明需要更小的数，移动 `right`。
+
+## 类型 2：同向双指针 / 滑动窗口
+
+两个指针都从左往右移动。
+
+常见题型：
+- Longest Substring Without Repeating Characters
+- Minimum Size Subarray Sum
+- Max Consecutive Ones
+- 满足某个条件的子数组数量
+
+基础模板：
+
+```python
+left = 0
+window_sum = 0
+ans = 0
+
+for right in range(len(nums)):
+    window_sum += nums[right]
+
+    while window_sum > target:
+        window_sum -= nums[left]
+        left += 1
+
+    ans = max(ans, right - left + 1)
+```
+
+核心思想：
+- `right` 负责扩大窗口。
+- `left` 负责在窗口不满足条件时缩小窗口。
+- 当前窗口长度是 `right - left + 1`。
+
+## 类型 3：快慢指针
+
+两个指针移动速度不同，常用于链表。
+
+常见题型：
+- Linked List Cycle
+- Find Middle of Linked List
+- Remove Nth Node From End
+- Find the Duplicate Number，使用环检测思想
+
+基础模板：
+
+```python
+slow = head
+fast = head
+
+while fast and fast.next:
+    slow = slow.next
+    fast = fast.next.next
+```
+
+核心思想：
+- 如果链表有环，`fast` 最终会追上 `slow`。
+- 如果没有环，`fast` 会先走到链表结尾。
+- 找中点时，`fast` 每次走两步，`slow` 每次走一步。
+
+## 类型 4：读写指针
+
+一个指针负责读，一个指针负责写，常用于原地修改数组。
+
+常见题型：
+- Remove Duplicates from Sorted Array
+- Remove Element
+- Move Zeroes
+- Partition Array
+- Sort Colors，LeetCode 75，三路划分
+
+基础模板：
+
+```python
+write = 0
+
+for read in range(len(nums)):
+    if nums[read] != val:
+        nums[write] = nums[read]
+        write += 1
+
+return write
+```
+
+核心思想：
+- `read` 遍历所有元素。
+- `write` 表示下一个应该写入的位置。
+- 满足条件的元素才写入 `nums[write]`。
+- LeetCode 75 是这个类型的进阶版：用 `left` 放 0，用 `right` 放 2，用 `i` 检查当前元素。
+
+## 类型 5：合并两个有序结构
+
+两个数组或者链表都已经有序时，可以各用一个指针。
+
+常见题型：
+- Merge Sorted Array
+- Merge Two Sorted Lists
+- Intersection of Two Sorted Arrays
+
+基础模板：
+
+```python
+i = 0
+j = 0
+res = []
+
+while i < len(a) and j < len(b):
+    if a[i] <= b[j]:
+        res.append(a[i])
+        i += 1
+    else:
+        res.append(b[j])
+        j += 1
+
+res.extend(a[i:])
+res.extend(b[j:])
+```
+
+核心思想：
+- 比较两个当前位置的值。
+- 谁更小，就把谁加入结果，并移动对应指针。
+- 最后不要忘记把剩余元素加入结果。
+
+## 类型 6：固定距离双指针
+
+两个指针之间保持固定距离。
+
+常见题型：
+- Remove Nth Node From End of List
+- Find Kth Node From End
+- 固定长度为 `k` 的子数组问题
+
+基础模板：
+
+```python
+fast = head
+slow = head
+
+for _ in range(n):
+    fast = fast.next
+
+while fast:
+    fast = fast.next
+    slow = slow.next
+```
+
+核心思想：
+- 先让 `fast` 走 `n` 步。
+- 然后 `fast` 和 `slow` 一起走。
+- 当 `fast` 到结尾时，`slow` 就在倒数第 `n` 个位置附近。
+
+## 常见错误
+
+- 没有排序，就直接用相向双指针做两数之和。
+- 应该用 `left < right`，却写成 `left <= right`，导致同一个元素被用两次。
+- 找到答案后没有移动指针，造成死循环。
+- 排序后忘记原始下标已经变了。
+- 滑动窗口里没有想清楚窗口什么时候合法，什么时候不合法。
+- 忘记处理空数组、空字符串、空链表。
+- 窗口长度写错，正确写法通常是 `right - left + 1`。
+
+## 如何选择模板
+
+- 有序数组里找一对数：相向双指针。
+- 最长或者最短子数组 / 子字符串：滑动窗口。
+- 链表找环、中点：快慢指针。
+- 原地删除、去重、移动元素：读写指针。
+- 合并两个有序数组 / 链表：合并双指针。
+- 找倒数第 `n` 个节点：固定距离双指针。
+
+## 刷题建议
+
+简单题：
+- Valid Palindrome
+- Merge Sorted Array
+- Remove Duplicates from Sorted Array
+- Move Zeroes
+- Sort Colors
+
+中等题：
+- Two Sum II
+- 3Sum
+- Container With Most Water
+- Longest Substring Without Repeating Characters
+
+链表题：
+- Linked List Cycle
+- Middle of the Linked List
+- Remove Nth Node From End of List
