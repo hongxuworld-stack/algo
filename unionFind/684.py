@@ -21,4 +21,7 @@ class Solution:
             if not union(start,end):
                 return[start,end]
         return None
+
+# Time: O(n * alpha(n)), where n = len(edges)
+# Space: O(n)
 #Time complexity is O(n α(n)), which is almost O(n) in practice. Space complexity is O(n) because we maintain the parent and size arrays.

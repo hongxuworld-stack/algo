@@ -20,3 +20,6 @@ class Solution:
                     dist[nr][nc] = dist[r][c] + 1
                     q.append((nr,nc))
         return dist
+
+# Time: O(rows * cols)
+# Space: O(rows * cols), for dist and the BFS queue

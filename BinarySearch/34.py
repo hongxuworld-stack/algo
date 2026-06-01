@@ -15,3 +15,6 @@ class Solution:
         if p1< len(nums) and nums[p1] == target:
             return [p1,p2]
         return [-1,-1]
+
+# Time: O(log n)
+# Space: O(1)

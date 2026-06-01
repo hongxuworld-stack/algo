@@ -27,3 +27,6 @@ class Solution:
             for c in range(cols):
                 max_val = max(max_val,dist[r][c])
         return max_val
+
+# Time: O(rows * cols)
+# Space: O(rows * cols), for dist and the BFS queue

@@ -47,3 +47,6 @@ class Solution:
                             num_island -= 1
             res.append(num_island)
         return res
+
+# Time: O(k * alpha(m * n)), where k = len(positions)
+# Space: O(m * n)

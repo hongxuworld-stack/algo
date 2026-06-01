@@ -41,3 +41,5 @@ class Solution:
         return -1
 
             
+# Time: O(rows * cols)
+# Space: O(rows * cols), for DFS recursion and the BFS queue

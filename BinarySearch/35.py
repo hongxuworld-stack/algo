@@ -9,3 +9,6 @@ class Solution:
             else:
                 left = mid + 1
         return left
+
+# Time: O(log n)
+# Space: O(1)

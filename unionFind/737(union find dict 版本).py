@@ -58,3 +58,7 @@ class Solution:
             if p1 != p2:
                 return False
         return True
+
+# Time: O((p + s) * alpha(w)), where p = len(similarPairs),
+# s = len(sentence1), and w is the number of unique words seen.
+# Space: O(w)

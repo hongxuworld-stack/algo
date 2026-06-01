@@ -29,3 +29,6 @@ class Solution:
                 if root_a == root_b:
                     return False
         return True
+
+# Time: O(e * alpha(26)), where e = len(equations); practically O(e)
+# Space: O(26), practically O(1)

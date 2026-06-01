@@ -24,3 +24,6 @@ class Solution:
                 if grid[r][c] ==1:
                     res += 1
         return res
+
+# Time: O(rows * cols)
+# Space: O(rows * cols), for DFS recursion in the worst case

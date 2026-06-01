@@ -20,3 +20,6 @@ class Solution:
                     height[nr][nc] = height[r][c] + 1
                     q.append((nr,nc))
         return height
+
+# Time: O(rows * cols)
+# Space: O(rows * cols), for height and the BFS queue

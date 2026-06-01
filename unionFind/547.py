@@ -19,3 +19,6 @@ class Solution:
         for i in range(n):
             res.add(find(i))
         return len(res)
+
+# Time: O(n^2 * alpha(n)), because we scan the upper triangle of the matrix
+# Space: O(n)

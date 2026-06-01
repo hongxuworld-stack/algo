@@ -25,3 +25,5 @@ class Solution:
 # space O(rows*cols)
 # mistake 1)return value wrong 2)  grid[r][c] = "0" not grid[r][c] == "0"(mark as visited steps)    
             
+# Time: O(rows * cols)
+# Space: O(rows * cols), for DFS recursion in the worst case

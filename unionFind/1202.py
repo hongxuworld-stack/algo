@@ -37,3 +37,7 @@ class Solution:
                 res[p] = ch
 
         return "".join(res)
+
+# Time: O((n + p) * alpha(n) + n log n), where n = len(s), p = len(pairs)
+# The n log n term comes from sorting characters inside connected components.
+# Space: O(n)

@@ -19,3 +19,6 @@ class Solution:
             else:
                 left = mid + 1
         return left
+
+# Time: O(n * log(sum(weights) - max(weights))), where n = len(weights)
+# Space: O(1)

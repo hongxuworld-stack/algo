@@ -26,3 +26,5 @@ class Solution:
                 left = mid + 1
         return left
          
+# Time: O(n * log(max(bloomDay))), where n = len(bloomDay)
+# Space: O(n), because can(days) builds the bloomed list

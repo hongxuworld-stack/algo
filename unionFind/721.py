@@ -34,3 +34,7 @@ class Solution:
             res.append([name] + sorted(emails))
         return res
 
+# Time: O(E * alpha(n) + E log E), where E is the total number of emails.
+# The sorting cost is across merged email groups.
+# Space: O(n + E)
+

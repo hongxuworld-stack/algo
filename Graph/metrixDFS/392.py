@@ -22,3 +22,5 @@ class Solution:
         return res
     
 # boundary check can  be moved after visited check(no need to be always top)
+# Time: O(rows * cols), each cell's dfs result is memoized once
+# Space: O(rows * cols), for dp and recursion stack

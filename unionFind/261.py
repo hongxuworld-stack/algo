@@ -30,3 +30,6 @@ class Solution:
             if not union(start,end):
                 return False
         return True
+
+# Time: O(E * alpha(n)), where E = len(edges)
+# Space: O(n)

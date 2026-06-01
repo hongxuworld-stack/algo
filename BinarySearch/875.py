@@ -14,3 +14,6 @@ class Solution:
             else:
                 left = mid + 1 
         return min_speed
+
+# Time: O(n * log(max(piles))), where n = len(piles)
+# Space: O(1)

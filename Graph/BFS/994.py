@@ -32,3 +32,5 @@ class Solution:
         return minutes if fresh_count == 0 else -1
         
 # return [nr][nc]
+# Time: O(rows * cols)
+# Space: O(rows * cols), for the BFS queue in the worst case

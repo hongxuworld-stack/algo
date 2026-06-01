@@ -21,3 +21,6 @@ class Solution:
                 if grid[r][c] == 1:
                     res = max(dfs(r,c),res)
         return res       
+
+# Time: O(rows * cols)
+# Space: O(rows * cols), for DFS recursion in the worst case

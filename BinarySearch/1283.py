@@ -16,4 +16,7 @@ class Solution:
             else:
                 left = mid + 1
         return left
+
+# Time: O(n * log(max(nums))), where n = len(nums)
+# Space: O(1)
         

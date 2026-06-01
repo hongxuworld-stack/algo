@@ -33,6 +33,9 @@ class Solution:
                 if is_similar(strs[i],strs[j]):
                     union(i,j)
         return count
+
+# Time: O(n^2 * k), where n = len(strs), k = len(strs[0])
+# Space: O(n)
     
 # 时间复杂度：
 # O(n^2 * k)
