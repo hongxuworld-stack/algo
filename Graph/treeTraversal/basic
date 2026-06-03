@@ -1,0 +1,97 @@
+# Binary tree traversal basic template
+#
+# 二叉树遍历的核心问题：
+#   每个节点都会被访问一次，区别只在于「什么时候处理 root」。
+#
+# 前序遍历 preorder:
+#   root -> left -> right
+#   先处理当前节点，再处理左右子树。
+#   直觉：一到节点就立刻记录它。
+#   常见场景：
+#     1. 复制一棵树
+#     2. 序列化二叉树
+#     3. 需要先知道父节点，再处理子节点的问题
+#
+# 中序遍历 inorder:
+#   left -> root -> right
+#   先处理左子树，再处理当前节点，最后处理右子树。
+#   直觉：root 被夹在 left 和 right 中间。
+#   常见场景：
+#     1. BST 按从小到大输出
+#     2. 找 BST 第 k 小
+#     3. 验证 BST 是否有序
+#
+# 后序遍历 postorder:
+#   left -> right -> root
+#   先处理左右子树，最后处理当前节点。
+#   直觉：等孩子都处理完，再回头处理 root。
+#   常见场景：
+#     1. 求树的高度 / 深度
+#     2. 判断平衡二叉树
+#     3. 删除 / 释放整棵树
+#     4. 需要从子树结果推导父节点答案的问题
+
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
+def preorder(root):
+    res = []
+
+    def dfs(node):
+        if not node:
+            return
+        # 前序：root 放在递归左右子树之前
+        res.append(node.val)
+        dfs(node.left)
+        dfs(node.right)
+
+    dfs(root)
+    return res
+
+
+def inorder(root):
+    res = []
+
+    def dfs(node):
+        if not node:
+            return
+        # 中序：root 放在 left 和 right 中间
+        dfs(node.left)
+        res.append(node.val)
+        dfs(node.right)
+
+    dfs(root)
+    return res
+
+
+def postorder(root):
+    res = []
+
+    def dfs(node):
+        if not node:
+            return
+        # 后序：root 放在递归左右子树之后
+        dfs(node.left)
+        dfs(node.right)
+        res.append(node.val)
+
+    dfs(root)
+    return res
+
+
+# Preorder:  root -> left -> right
+# Inorder:   left -> root -> right
+# Postorder: left -> right -> root
+#
+# Time: O(n)
+# Space: O(h), h is the height of the tree
+#
+# n = 节点总数
+# h = 树高
+# 如果树很平衡，h 大约是 log n
+# 如果树退化成链表，h 可能是 n

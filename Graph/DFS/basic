@@ -1,0 +1,91 @@
+# Graph DFS basic template
+#
+# 这个 category 用来放「非 matrix」的 DFS：
+#   图 / 邻接表 / 节点之间的连接关系
+#
+# 和 matrix DFS 的区别：
+#   matrix DFS: 位置是 (r, c)，邻居通常是上下左右
+#   graph DFS: 位置是 node，邻居来自 graph[node]
+#
+# 常见场景：
+#   1. 判断两个点是否连通
+#   2. 统计 connected components
+#   3. 遍历所有能到达的节点
+#   4. 检测环
+#   5. 拓扑排序相关题
+#   6. clone graph / 路径搜索
+
+
+def dfs_recursive(graph, start):
+    visited = set()
+    order = []
+
+    def dfs(node):
+        if node in visited:
+            return
+
+        visited.add(node)
+        order.append(node)
+
+        for nei in graph[node]:
+            dfs(nei)
+
+    dfs(start)
+    return order
+
+
+def dfs_iterative(graph, start):
+    visited = set()
+    order = []
+    stack = [start]
+
+    while stack:
+        node = stack.pop()
+
+        if node in visited:
+            continue
+
+        visited.add(node)
+        order.append(node)
+
+        for nei in graph[node]:
+            if nei not in visited:
+                stack.append(nei)
+
+    return order
+
+
+def count_components(graph):
+    visited = set()
+    count = 0
+
+    def dfs(node):
+        if node in visited:
+            return
+
+        visited.add(node)
+
+        for nei in graph[node]:
+            dfs(nei)
+
+    for node in graph:
+        if node not in visited:
+            count += 1
+            dfs(node)
+
+    return count
+
+
+# graph example:
+# graph = {
+#     0: [1, 2],
+#     1: [0, 3],
+#     2: [0],
+#     3: [1],
+# }
+#
+# Time: O(V + E)
+# Space: O(V)
+#
+# V = number of nodes
+# E = number of edges
