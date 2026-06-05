@@ -11,22 +11,28 @@ Graph/934.py: 0
 Graph/BFS/1164.py: 0
 Graph/BFS/1765.py: 1
 Graph/BFS/542.py: 0
-Graph/BFS/994.py: 0
+Graph/BFS/994.py: 1
 
 Graph/metrixDFS/200.py: 0
 Graph/metrixDFS/329.py: 0
 Graph/metrixDFS/695.py: 0
 Graph/metrixDFS/1020.py: 0
 
-Graph/treeTraversal/101.py: 0
+Graph/treeTraversal/101.py: 1
+Graph/treeTraversal/102.py: 1
 Graph/treeTraversal/104.py: 1
 Graph/treeTraversal/111.py: 1
+Graph/treeTraversal/113.py: 0
 Graph/treeTraversal/124.py: 1 (note:res init value)
 Graph/treeTraversal/230.py: 1
 Graph/treeTraversal/226.py: 1
-Graph/treeTraversal/530.py: 0
+Graph/treeTraversal/530.py: 2
 Graph/treeTraversal/543.py: 1
 Graph/treeTraversal/98.py: 1
+
+Stack/20.py: 0
+Stack/84.py: 0
+Stack/739.py: 0
 
 two pointer/5.py: 0
 two pointer/42(hard).py: 0
