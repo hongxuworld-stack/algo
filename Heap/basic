@@ -1,0 +1,186 @@
+# Heap / Priority Queue basic knowledge
+#
+# Heap is used when we need to repeatedly get the smallest or largest item.
+#
+# Python uses heapq.
+# heapq is a min heap by default.
+#
+# Common operations:
+#   heapq.heappush(heap, x)  # push x
+#   heapq.heappop(heap)      # pop smallest x
+#   heap[0]                  # peek smallest x
+#
+# Common use cases:
+#   1. Top K smallest / largest
+#   2. Kth largest / kth smallest
+#   3. Merge k sorted lists
+#   4. Meeting rooms / schedule problems
+#   5. Dijkstra shortest path
+#   6. Data stream median, usually with two heaps
+
+import heapq
+
+
+# --------------------
+# 1. Min heap
+# --------------------
+
+heap = []
+
+heapq.heappush(heap, 3)
+heapq.heappush(heap, 1)
+heapq.heappush(heap, 2)
+
+smallest = heap[0]        # 1
+first = heapq.heappop(heap)  # 1
+
+
+# --------------------
+# 2. Turn list into heap
+# --------------------
+
+nums = [5, 1, 8, 3, 2]
+heapq.heapify(nums)
+
+# nums is now a valid heap.
+# nums[0] is the smallest value.
+
+
+# --------------------
+# 3. Max heap
+# --------------------
+#
+# Python heapq does not have max heap by default.
+# Use negative values.
+
+max_heap = []
+
+heapq.heappush(max_heap, -3)
+heapq.heappush(max_heap, -1)
+heapq.heappush(max_heap, -5)
+
+largest = -heapq.heappop(max_heap)  # 5
+
+
+# --------------------
+# 4. Kth largest
+# --------------------
+#
+# Keep a min heap of size k.
+# The heap stores the current k largest numbers.
+# heap[0] is the kth largest number.
+
+def kth_largest(nums, k):
+    heap = []
+
+    for num in nums:
+        heapq.heappush(heap, num)
+
+        if len(heap) > k:
+            heapq.heappop(heap)
+
+    return heap[0]
+
+
+# Time: O(n log k)
+# Space: O(k)
+
+
+# --------------------
+# 5. Top k largest
+# --------------------
+
+def top_k_largest(nums, k):
+    heap = []
+
+    for num in nums:
+        heapq.heappush(heap, num)
+
+        if len(heap) > k:
+            heapq.heappop(heap)
+
+    return heap
+
+
+# If sorted result is needed:
+# return sorted(heap, reverse=True)
+
+
+# --------------------
+# 6. Heap with tuple
+# --------------------
+#
+# Tuple is compared from left to right.
+# This is useful when we need priority plus extra data.
+
+tasks = []
+
+heapq.heappush(tasks, (2, "clean"))
+heapq.heappush(tasks, (1, "study"))
+heapq.heappush(tasks, (3, "sleep"))
+
+priority, task = heapq.heappop(tasks)  # (1, "study")
+
+
+# --------------------
+# 7. Two heaps for median
+# --------------------
+#
+# left: max heap, stores smaller half, use negative values
+# right: min heap, stores larger half
+#
+# Keep:
+#   len(left) == len(right)
+#   or len(left) == len(right) + 1
+
+class MedianFinderBasic:
+    def __init__(self):
+        self.left = []
+        self.right = []
+
+    def add_num(self, num):
+        heapq.heappush(self.left, -num)
+
+        if self.left and self.right and -self.left[0] > self.right[0]:
+            val = -heapq.heappop(self.left)
+            heapq.heappush(self.right, val)
+
+        if len(self.left) > len(self.right) + 1:
+            val = -heapq.heappop(self.left)
+            heapq.heappush(self.right, val)
+
+        if len(self.right) > len(self.left):
+            val = heapq.heappop(self.right)
+            heapq.heappush(self.left, -val)
+
+    def find_median(self):
+        if len(self.left) > len(self.right):
+            return -self.left[0]
+
+        return (-self.left[0] + self.right[0]) / 2
+
+
+# --------------------
+# 8. Pattern summary
+# --------------------
+#
+# Need smallest each time:
+#   use min heap directly
+#
+# Need largest each time:
+#   use max heap by pushing negative values
+#
+# Need kth largest:
+#   keep min heap of size k
+#
+# Need kth smallest:
+#   keep max heap of size k
+#
+# Need priority with extra information:
+#   push tuple like (priority, index, value)
+#
+# Important:
+#   heappush: O(log n)
+#   heappop:  O(log n)
+#   peek:     O(1)
+#   heapify:  O(n)
