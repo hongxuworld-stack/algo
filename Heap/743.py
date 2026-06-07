@@ -27,6 +27,7 @@ class Solution:
         for u, v, w in times:
             graph[u].append((w,v))
         dist_list = [float("inf")] * (n + 1)
+        dist_list[k] = 0
         heap = [(0,k)]
         while heap:
             dist , node = heapq.heappop(heap)
