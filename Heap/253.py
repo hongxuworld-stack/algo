@@ -12,6 +12,20 @@
 # Explanation:
 # The two meetings do not overlap, so only one room is needed.
 from typing import List
-
+import heapq
 class Solution:
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
+        intervals.sort(key=lambda x: x[0])
+        res = 0
+        heap = []
+
+        for interval in intervals:
+            start = interval[0]
+            end = interval[1]
+
+            while heap and heap[0] <= start:
+                heapq.heappop(heap)
+            heapq.heappush(heap, end)
+            res = max(res, len(heap))
+
+        return res

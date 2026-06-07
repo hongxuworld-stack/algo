@@ -206,3 +206,54 @@ print(regular_queue.qsize())  # current size
 # LeetCode recommendation:
 #   Use deque for BFS.
 #   Use queue.Queue when you need thread-safe queue behavior.
+
+
+# --------------------
+# Custom Sort
+# --------------------
+# Prefer key= when each item can be mapped to a sortable value.
+
+numbers = [5, 2, 9, 1]
+print(sorted(numbers))  # [1, 2, 5, 9]
+print(sorted(numbers, reverse=True))  # [9, 5, 2, 1]
+
+words = ["pear", "fig", "apple", "kiwi"]
+print(sorted(words, key=len))  # ['fig', 'pear', 'kiwi', 'apple']
+
+# Sort by multiple rules:
+#   1. score descending
+#   2. name ascending when scores are equal
+students = [("Bob", 90), ("Alice", 95), ("David", 90)]
+students.sort(key=lambda student: (-student[1], student[0]))
+print(students)  # [('Alice', 95), ('Bob', 90), ('David', 90)]
+
+# sorted(iterable, ...) returns a new list.
+# list.sort(...) modifies the original list and returns None.
+
+
+# Use cmp_to_key when the order depends on comparing two items directly.
+from functools import cmp_to_key
+
+
+def compare(a, b):
+    if a + b > b + a:
+        return -1  # a comes before b
+    if a + b < b + a:
+        return 1  # b comes before a
+    return 0
+
+
+# Example: arrange numbers to form the largest possible number.
+values = [3, 30, 34, 5, 9]
+text_values = list(map(str, values))
+text_values.sort(key=cmp_to_key(compare))
+largest_number = "".join(text_values)
+print(largest_number)  # 9534330
+
+
+# Comparator return values:
+#   negative: a comes before b
+#   positive: b comes before a
+#   zero:     a and b are equal for sorting
+#
+# Time complexity: O(n log n)
