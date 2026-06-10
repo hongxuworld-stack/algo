@@ -9,7 +9,7 @@ BinarySearch/1482.py: 0
 Graph/934.py: 0
 
 Graph/BFS/1164.py: 0
-Graph/BFS/1765.py: 1
+Graph/BFS/1765.py: 2
 Graph/BFS/542.py: 0
 Graph/BFS/994.py: 1
 
@@ -23,10 +23,10 @@ Graph/treeTraversal/102.py: 1
 Graph/treeTraversal/104.py: 1
 Graph/treeTraversal/111.py: 1
 Graph/treeTraversal/113.py: 0
-Graph/treeTraversal/124.py: 1 (note:res init value)
+Graph/treeTraversal/124.py: 2 (note:res init value)
 Graph/treeTraversal/230.py: 1
 Graph/treeTraversal/226.py: 1
-Graph/treeTraversal/530.py: 2
+Graph/treeTraversal/530.py: 3
 Graph/treeTraversal/543.py: 1
 Graph/treeTraversal/98.py: 1
 
@@ -38,8 +38,11 @@ Heap/2402(HARD).py: 0
 Heap/253.py: 0
 Heap/295.py: 0
 Heap/347.py: 0
-Heap/743.py: 0
 Heap/973.py: 0
+
+Heap/Dijkstra/743.py: 0
+Heap/Dijkstra/1514.py: 0
+Heap/Dijkstra/1631.py: 0
 
 Stack/20.py: 0
 Stack/84.py: 0
@@ -58,7 +61,7 @@ two pointer/870.py: 0
 unionFind/1202.py: 0
 unionFind/261.py: 0
 unionFind/305(hard).py: 0
-unionFind/547.py: 1
+unionFind/547.py: 2
 unionFind/684.py: 0
 unionFind/721.py: 0
 unionFind/737(union find dict 版本).py: 0
