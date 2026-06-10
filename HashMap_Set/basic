@@ -1,0 +1,169 @@
+HashMap / Set / Prefix Sum
+
+Use this category for problems involving:
+
+- Fast lookup or duplicate detection
+- Frequency counting
+- Matching values or indices
+- Prefix sums
+- Subarray sums with a HashMap
+
+
+1. Set: existence and duplicate detection
+
+Use a set when only existence matters and no extra value is needed.
+
+def contains_duplicate(nums):
+    seen = set()
+
+    for num in nums:
+        if num in seen:
+            return True
+        seen.add(num)
+
+    return False
+
+Common problems:
+- Contains Duplicate
+- Longest Consecutive Sequence
+- Happy Number
+- Intersection of Two Arrays
+
+Average time for lookup, add, and remove: O(1)
+
+
+2. HashMap: value to information
+
+Use a dictionary when each key needs extra information such as:
+
+- count
+- index
+- most recent position
+- corresponding value
+
+Frequency counting:
+
+def count_frequency(nums):
+    count = {}
+
+    for num in nums:
+        count[num] = count.get(num, 0) + 1
+
+    return count
+
+Index lookup:
+
+def two_sum(nums, target):
+    index = {}
+
+    for i, num in enumerate(nums):
+        need = target - num
+
+        if need in index:
+            return [index[need], i]
+
+        index[num] = i
+
+    return []
+
+
+3. Prefix sum
+
+prefix[i] represents the sum of the first i elements.
+
+nums:   [a, b, c, d]
+prefix: [0, a, a+b, a+b+c, a+b+c+d]
+
+The sum of nums[left:right + 1] is:
+
+prefix[right + 1] - prefix[left]
+
+def build_prefix_sum(nums):
+    prefix = [0]
+
+    for num in nums:
+        prefix.append(prefix[-1] + num)
+
+    return prefix
+
+
+4. Prefix sum + HashMap
+
+This pattern is useful for counting subarrays whose sum equals k.
+
+If:
+
+current_prefix - previous_prefix == k
+
+then:
+
+previous_prefix == current_prefix - k
+
+Store how many times each previous prefix sum has appeared.
+
+def count_subarrays_with_sum_k(nums, k):
+    prefix_count = {0: 1}
+    prefix_sum = 0
+    answer = 0
+
+    for num in nums:
+        prefix_sum += num
+        answer += prefix_count.get(prefix_sum - k, 0)
+        prefix_count[prefix_sum] = prefix_count.get(prefix_sum, 0) + 1
+
+    return answer
+
+Why start with {0: 1}:
+- It represents one empty prefix.
+- It allows a subarray starting at index 0 to be counted.
+
+
+5. Prefix sum + Set
+
+Use a set when the question asks whether a matching prefix exists,
+instead of asking how many matching prefixes exist.
+
+def has_subarray_with_sum_k(nums, k):
+    seen_prefix = {0}
+    prefix_sum = 0
+
+    for num in nums:
+        prefix_sum += num
+
+        if prefix_sum - k in seen_prefix:
+            return True
+
+        seen_prefix.add(prefix_sum)
+
+    return False
+
+
+How to choose
+
+- Need to know whether a value exists: Set
+- Need count, index, or another associated value: HashMap
+- Need a range sum quickly: Prefix Sum
+- Need to count subarrays satisfying a sum condition: Prefix Sum + HashMap
+- Need to detect whether such a subarray exists: Prefix Sum + Set
+
+
+Common mistakes
+
+- Using a set when duplicate counts matter.
+- Forgetting prefix_count = {0: 1}.
+- Updating prefix_count before checking prefix_sum - k.
+- Mixing prefix indices with nums indices.
+- Using sliding window when nums can contain negative numbers.
+
+
+Suggested problems
+
+- 1. Two Sum
+- 49. Group Anagrams
+- 128. Longest Consecutive Sequence
+- 217. Contains Duplicate
+- 242. Valid Anagram
+- 303. Range Sum Query - Immutable
+- 525. Contiguous Array
+- 560. Subarray Sum Equals K
+- 974. Subarray Sums Divisible by K
