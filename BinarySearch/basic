@@ -147,3 +147,157 @@ def max_feasible(left, right):
 - 找第一个满足：满足就往左压，right = mid - 1
 - 找最后一个满足：满足就往右推，left = mid + 1
 - 答案二分的难点通常不是模板，而是 check(x) 和单调性
+
+
+3) 开闭区间与循环条件
+
+二分中的 left 和 right 表示“还没有被排除的搜索范围”。
+循环条件取决于区间定义，不能只靠记忆选择。
+
+
+一、闭区间 [left, right]
+
+[left, right] 表示 left 和 right 都可能是答案。
+
+初始化：
+
+left = 0
+right = len(nums) - 1
+
+循环条件：
+
+while left <= right:
+
+为什么使用 left <= right：
+- 当 left == right 时，区间 [left, right] 中还有一个元素没有检查。
+- 只有 left > right 时，闭区间才为空。
+
+排除 mid：
+- 排除 mid 以及右边：right = mid - 1
+- 排除 mid 以及左边：left = mid + 1
+
+标准查找模板：
+
+def binary_search(nums, target):
+    left, right = 0, len(nums) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if nums[mid] == target:
+            return mid
+        elif nums[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    return -1
+
+闭区间记忆：
+- 初始化 right = n - 1
+- 循环使用 left <= right
+- 更新时跳过已经检查过的 mid：mid + 1 或 mid - 1
+- 循环结束时 left == right + 1
+
+
+二、左闭右开区间 [left, right)
+
+[left, right) 表示 left 可能是答案，但 right 不在搜索范围内。
+
+初始化：
+
+left = 0
+right = len(nums)
+
+循环条件：
+
+while left < right:
+
+为什么使用 left < right：
+- 当 left == right 时，区间 [left, right) 已经为空。
+- 因为 right 本来就不属于搜索范围，所以不需要再检查。
+
+排除 mid：
+- 保留左半部分：[left, mid)，所以 right = mid
+- 排除左半部分：[mid + 1, right)，所以 left = mid + 1
+
+查找第一个 >= target 的位置：
+
+def lower_bound(nums, target):
+    left, right = 0, len(nums)
+
+    while left < right:
+        mid = (left + right) // 2
+
+        if nums[mid] >= target:
+            right = mid
+        else:
+            left = mid + 1
+
+    return left
+
+左闭右开区间记忆：
+- 初始化 right = n
+- 循环使用 left < right
+- right 不在区间内，保留 mid 时写 right = mid
+- 循环结束时 left == right，这个位置就是边界答案
+
+
+三、什么时候使用 left < right，什么时候使用 left <= right
+
+使用 left <= right：
+- 搜索区间定义为闭区间 [left, right]。
+- left == right 时，这个位置还没有被检查。
+- 常见于查找某个元素，以及使用 ans 保存候选答案的模板。
+
+使用 left < right：
+- 搜索区间定义为左闭右开 [left, right)。
+- left == right 时区间已经为空。
+- 也常用于不断缩小范围，最后让 left 和 right 汇合到边界答案。
+
+不要根据题型单独判断循环条件，要看初始化和更新方式是否匹配：
+
+闭区间：
+
+left, right = 0, n - 1
+while left <= right:
+    ...
+    left = mid + 1
+    right = mid - 1
+
+左闭右开区间：
+
+left, right = 0, n
+while left < right:
+    ...
+    left = mid + 1
+    right = mid
+
+
+四、常见错误
+
+1. 闭区间写 while left < right
+
+这样可能漏掉 left == right 时的最后一个候选位置。
+
+2. 左闭右开区间写 right = mid - 1
+
+这会多排除一个位置，因为 [left, mid) 本来就已经不包含 mid。
+
+3. 使用 while left <= right，却在某个分支写 right = mid
+
+当 left == right == mid 且进入这个分支时，区间不会缩小，可能死循环。
+
+4. 混用初始化、循环条件和边界更新
+
+下面三项必须属于同一套区间定义：
+- right 初始化为 n 还是 n - 1
+- 循环使用 < 还是 <=
+- 更新使用 mid 还是 mid - 1
+
+
+最终口诀：
+
+- [left, right]：两边都有效，所以 left == right 还要查，使用 left <= right。
+- [left, right)：right 无效，所以 left == right 已经为空，使用 left < right。
+- 每次更新后，新的区间必须严格缩小，并且仍然包含所有可能答案。

@@ -16,6 +16,7 @@ class Solution:
             mid = (left + right) // 2
             if can(mid):
                 right = mid
+                
             else:
                 left = mid + 1
         return left
