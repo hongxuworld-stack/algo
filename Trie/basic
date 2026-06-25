@@ -1,0 +1,76 @@
+# Trie / Prefix Tree basic knowledge
+#
+# A Trie stores strings one character at a time.
+# Each path from the root represents a prefix.
+#
+# Common uses:
+# 1. Prefix search
+# 2. Dictionary word lookup
+# 3. Autocomplete
+# 4. Word search problems
+
+
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.is_word = False
+
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+
+    def insert(self, word):
+        node = self.root
+
+        for char in word:
+            if char not in node.children:
+                node.children[char] = TrieNode()
+            node = node.children[char]
+
+        node.is_word = True
+
+    def search(self, word):
+        node = self._find_node(word)
+        return node is not None and node.is_word
+
+    def starts_with(self, prefix):
+        return self._find_node(prefix) is not None
+
+    def _find_node(self, text):
+        node = self.root
+
+        for char in text:
+            if char not in node.children:
+                return None
+            node = node.children[char]
+
+        return node
+
+
+# Example:
+trie = Trie()
+trie.insert("apple")
+
+print(trie.search("apple"))       # True
+print(trie.search("app"))         # False
+print(trie.starts_with("app"))    # True
+
+trie.insert("app")
+print(trie.search("app"))         # True
+
+
+# Time complexity:
+# insert(word):       O(L)
+# search(word):       O(L)
+# starts_with(prefix): O(L)
+#
+# L is the length of the word or prefix.
+#
+# Space complexity:
+# O(total number of stored characters) in the worst case.
+#
+# Important:
+# is_word distinguishes a complete word from a prefix.
+# For example, after inserting "apple", "app" exists as a prefix,
+# but it is not a stored word until "app" is inserted separately.

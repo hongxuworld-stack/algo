@@ -24,13 +24,13 @@ Graph/treeTraversal/101.py: 1
 Graph/treeTraversal/102.py: 1
 Graph/treeTraversal/104.py: 1
 Graph/treeTraversal/111.py: 1
-Graph/treeTraversal/113.py: 0
-Graph/treeTraversal/124.py: 2 (note:res init value)
+Graph/treeTraversal/113.py: 1
+Graph/treeTraversal/124.py: 3 (note:res init value)
 Graph/treeTraversal/230.py: 1
 Graph/treeTraversal/226.py: 1
-Graph/treeTraversal/530.py: 3
+Graph/treeTraversal/530.py: 4
 Graph/treeTraversal/543.py: 1
-Graph/treeTraversal/98.py: 1
+Graph/treeTraversal/98.py: 2
 
 HashMap_Set/128.py: 0
 HashMap_Set/560.py: 0

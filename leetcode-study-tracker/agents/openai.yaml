@@ -1,0 +1,7 @@
+interface:
+  display_name: "LeetCode Study Tracker"
+  short_description: "Track reviews and choose practice problems"
+  default_prompt: "Use $leetcode-study-tracker to analyze my coding_times review history and recommend practice problems."
+
+policy:
+  allow_implicit_invocation: true
