@@ -20,17 +20,20 @@ Graph/metrixDFS/329.py: 0
 Graph/metrixDFS/695.py: 0
 Graph/metrixDFS/1020.py: 0
 
+Graph/treeTraversal/98.py: 1
 Graph/treeTraversal/101.py: 1
 Graph/treeTraversal/102.py: 1
 Graph/treeTraversal/104.py: 1
 Graph/treeTraversal/111.py: 1
 Graph/treeTraversal/113.py: 0
 Graph/treeTraversal/124.py: 2 (note:res init value)
-Graph/treeTraversal/230.py: 1
+Graph/treeTraversal/129.py: 0
 Graph/treeTraversal/226.py: 1
+Graph/treeTraversal/230.py: 1
+Graph/treeTraversal/437.py: 0
+Graph/treeTraversal/513.py: 0
 Graph/treeTraversal/530.py: 3
 Graph/treeTraversal/543.py: 1
-Graph/treeTraversal/98.py: 1
 
 HashMap_Set/128.py: 0
 HashMap_Set/560.py: 0
