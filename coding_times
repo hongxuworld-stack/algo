@@ -37,14 +37,14 @@ HashMap_Set/128.py: 0
 HashMap_Set/560.py: 0
 
 Heap/23(hard).py: 0
-Heap/1046.py: 0
+Heap/1046.py: 1
 Heap/1642.py: 0
-Heap/215.py: 1
-Heap/2402(HARD).py: 0
-Heap/253.py: 0
-Heap/295.py: 0
-Heap/347.py: 0
-Heap/973.py: 0
+Heap/215.py: 2
+Heap/2402(HARD).py: 1
+Heap/253.py: 1
+Heap/295.py: 1  
+Heap/347.py: 1
+Heap/973.py: 1
 
 Heap/Dijkstra/743.py: 1
 Heap/Dijkstra/1514.py: 0
