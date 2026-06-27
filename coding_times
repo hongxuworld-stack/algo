@@ -46,9 +46,9 @@ Heap/295.py: 1
 Heap/347.py: 1
 Heap/973.py: 1
 
-Heap/Dijkstra/743.py: 1
-Heap/Dijkstra/1514.py: 0
-Heap/Dijkstra/1631.py: 0
+Heap/Dijkstra/743.py: 2
+Heap/Dijkstra/1514.py: 1(无向图)
+Heap/Dijkstra/1631.py: 0 
 
 Stack/20.py: 0
 Stack/84.py: 0
@@ -57,12 +57,13 @@ Stack/739.py: 1
 two pointer/5.py: 0
 two pointer/42(hard).py: 0
 two pointer/75.py: 1
-two pointer/143.py: 0
-two pointer/206.py: 0
 two pointer/424.py: 0
 two pointer/567.py: 0
 two pointer/713.py: 0
 two pointer/870.py: 0
+
+LinkedList/143.py: 0
+LinkedList/206.py: 0
 
 unionFind/1202.py: 0
 unionFind/261.py: 0
