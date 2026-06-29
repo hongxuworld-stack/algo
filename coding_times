@@ -15,6 +15,7 @@ Graph/BFS/994.py: 1
 
 Graph/topologicalSort/207.py: 0
 Graph/topologicalSort/210.py: 0
+Graph/topologicalSort/802.py: 0
 
 Graph/metrixDFS/200.py: 1
 Graph/metrixDFS/329.py: 0
