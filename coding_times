@@ -8,33 +8,40 @@ BinarySearch/1482.py: 0
 
 Graph/934.py: 0
 
-Graph/DFS/133,py: 1
-
 Graph/BFS/1164.py: 0
 Graph/BFS/1765.py: 2
 Graph/BFS/542.py: 1
 Graph/BFS/994.py: 1
+
+Graph/topologicalSort/207.py: 0
+Graph/topologicalSort/210.py: 0
 
 Graph/metrixDFS/200.py: 1
 Graph/metrixDFS/329.py: 0
 Graph/metrixDFS/695.py: 0
 Graph/metrixDFS/1020.py: 0
 
-Graph/treeTraversal/98.py: 1
+Graph/treeTraversal/98.py: 2
 Graph/treeTraversal/101.py: 1
 Graph/treeTraversal/102.py: 1
 Graph/treeTraversal/104.py: 1
 Graph/treeTraversal/111.py: 1
 Graph/treeTraversal/113.py: 1
 Graph/treeTraversal/124.py: 3 (note:res init value)
-Graph/treeTraversal/230.py: 1
+Graph/treeTraversal/129.py: 0
 Graph/treeTraversal/226.py: 1
+Graph/treeTraversal/230.py: 1
+Graph/treeTraversal/437.py: 0
+Graph/treeTraversal/513.py: 0
 Graph/treeTraversal/530.py: 4
 Graph/treeTraversal/543.py: 1
-Graph/treeTraversal/98.py: 2
 
 HashMap_Set/128.py: 0
 HashMap_Set/560.py: 0
+
+Trie/208.py: 1
+Trie/211.py: 1
+Trie/212.py: 1
 
 Heap/23(hard).py: 1
 Heap/1046.py: 1
@@ -52,6 +59,7 @@ Heap/Dijkstra/1631.py: 0
 
 Stack/20.py: 0
 Stack/84.py: 0
+Stack/85.py: 0
 Stack/739.py: 1
 
 two pointer/5.py: 0
@@ -63,6 +71,7 @@ two pointer/713.py: 0
 two pointer/870.py: 0
 
 LinkedList/143.py: 0
+LinkedList/138.py: 0
 LinkedList/206.py: 0
 
 unionFind/1202.py: 0
