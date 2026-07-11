@@ -1,45 +1,24 @@
-# Input: equations = [["a","b"],["b","c"]], values = [2.0,3.0], queries = [["a","c"],["b","a"],["a","e"],["a","a"],["x","x"]]
-# a ->(2) b -> c (3)
-from collections import defaultdict
+import heapq
 class Solution:
-    def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
-        graph = defaultdict(list)
-        for i in range(len(equations)):
-            start = equations[i][0]
-            end = equations[i][1]
-            value = values[i]
-            graph[start].append((end,value))
-            graph[end].append((start,1/value))
-        res = []
-        for i in range(len(queries)):
-            start = queries[i][0]
-            end = queries[i][1]
-            if start not in graph or end not in graph:
-                res.append(-1.0)
+    def minimumEffortPath(self, heights: List[List[int]]) -> int:
+        rows = len(heights)
+        cols = len(heights[0])
+        effort = [[float("inf")] * cols for _ in range(rows)]
+        effort[0][0] = 0
+        heap = [(0,0,0)]
+        directions = [(1,0),(-1,0),(0,1),(0,-1)]
+        while heap:
+            cur_effort, r, c = heapq.heappop()
+            if r == rows-1 and c == cols -1:
+                return cur_effort
+            if effort[r][c] < cur_effort:
                 continue
-            if start == end:
-                res.append(1)
-                continue
-            visited = set()
-            ration = 1
-            node_find = False
-            def dfs(node,cur_ration,target):
-                nonlocal ration
-                nonlocal node_find
-                if node_find:
-                    return
-                if  node in visited:
-                    return cur_ration
-                if node == target:
-                    node_find = True
-                    ration = cur_ration
-                visited.add(node)
-                for nei, value in graph[node]:
-                    dfs(nei,cur_ration * value, target)
-                return cur_ration
-            dfs(start,ration,end)
-            if node_find:
-                res.append(ration)
-            else:
-                res.append(-1.0)
-        return res
+            effort[r][c] = cur_effort
+            for dr, dc in  directions:
+                nr = r + dr
+                nc = c + dc
+                if 0<=nr<rows and 0<=nc<cols:
+                    diff = abs(heights[r][c] - heights[nr][nc])
+                    new_effort = max(diff, cur_effort)
+                    if new_effort < effort[nr][nc]:
+                        heap.heappush((new_effort,nr,nc))
